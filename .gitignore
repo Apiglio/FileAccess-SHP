@@ -1,0 +1,8 @@
+*.exe
+*.bak
+/lib/*
+/backup/*
+*.var
+*.dbf
+*.shp
+*.shx
