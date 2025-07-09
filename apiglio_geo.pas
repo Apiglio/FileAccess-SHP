@@ -115,18 +115,14 @@ begin
 end;
 procedure TAGeo.SetFieldChar(field_index:word;value:string);
 var ptr:pointer;
+    len:integer;
 begin
   assert(field_index<MaxPropertyCount,'超出最大字段数。');
   ptr:=Self.GeoProperty[field_index];
-  //if ptr<>nil then freemem(ptr,sizeof(ptr));
-  if ptr<>nil then
-    begin
-      freemem(ptr,StrLen(pchar(ptr))+1);
-    end;
-  //ptr:=getmem(sizeof(string));
+  if ptr<>nil then freemem(ptr,StrLen(pchar(ptr))+1);
   ptr:=getmem(length(value)+1);
-  //pstring(ptr)^:=value;
-  StrLCopy(pchar(ptr),@value[1],length(value));
+  len:=length(value);
+  if len<>0 then StrLCopy(pchar(ptr),@value[1],len);
   Self.GeoProperty[field_index]:=ptr;
 end;
 
